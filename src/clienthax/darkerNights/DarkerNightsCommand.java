@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 
 public class DarkerNightsCommand implements CommandExecutor {
 
-	DarkerNights plugin = null;
+	private DarkerNights plugin = null;
 	
 	public DarkerNightsCommand(DarkerNights plugin)
 	{
@@ -15,7 +15,6 @@ public class DarkerNightsCommand implements CommandExecutor {
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
 		return false;
 	}
 
