@@ -2,7 +2,6 @@ package clienthax.darkerNights;
 
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,13 +25,20 @@ public class DarkerNights extends JavaPlugin implements Listener {
 	 */
 	private static final PotionEffect blindnessEffect = PotionEffectType.BLINDNESS.createEffect(999999, 0);
 	
+    /**
+     * Contains an instance of this plugin.
+     */
+    private static DarkerNights plugin;
+    
 	/**
 	 * Runs when the plugin is enabled.
 	 */
 	@Override
 	public void onEnable() {
+        saveDefaultConfig();
 		getServer().getPluginManager().registerEvents(this, this);
 		getCommand("darkernights").setExecutor(new DarkerNightsCommand(this));
+        DarkerNights.plugin = this;
 	}
 
 	/**
@@ -106,8 +112,7 @@ public class DarkerNights extends JavaPlugin implements Listener {
 	 * @return true if the light level is below 5 units
 	 */
 	private static boolean darkUnderPlayer(Player player) {
-		Block block = player.getLocation().getBlock();
-		return block.getLightLevel() < 5; 
+		return player.getLocation().getBlock().getLightLevel() < 5; 
 	}
 
 	private static void checkBlindness(Player player) {
@@ -135,10 +140,12 @@ public class DarkerNights extends JavaPlugin implements Listener {
 	}
 	
 	/**
-	 * Checks whether it is night in the world.
+	 * Checks whether it is night in the world, or whether the
+     * config option to ignore this check is enabled.
 	 * 
 	 * @param world World to check
-	 * @return true if it is night
+	 * @return true if it is night, or if the check is ignored in the 
+     *         config file.
 	 */
 	private static boolean isNighttimeInWorld(World world) {
 		/*
@@ -147,6 +154,6 @@ public class DarkerNights extends JavaPlugin implements Listener {
 		 * <Riking> 23K-[24K|0] is sunrise
 		 */
 		Long time = world.getTime();
-		return (time >= 13000 && time <= 23000);
+		return plugin.getConfig().getBoolean("ignoreTimeOfDay") || (time >= 13000 && time <= 23000);
 	}
 }
