@@ -1,11 +1,16 @@
-    name: DarkerNights
-    main: clienthax.darkerNights.DarkerNights
-    version: 1.0
-    description: DarkerNights
-    permissions:
-      darkernights.bypass:
-        description: bypass darkernights
-        default: false
-    commands:
-      testblind:
-      removeblind:
+name: DarkerNights
+main: clienthax.darkerNights.DarkerNights
+version: 1.0
+description: DarkerNights
+permissions:
+  darkernights.bypass:
+    description: bypass darkernights
+    default: false
+  darkernights.admin:
+    description: Run admin commands for DarkerNights
+    default: op
+commands:
+  darkernights:
+    permission: darkernights.admin
+    usage: | 
+      /darkernights reloadconfig: reload the config
