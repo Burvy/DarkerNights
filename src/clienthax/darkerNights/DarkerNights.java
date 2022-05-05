@@ -114,30 +114,6 @@ public class DarkerNights extends JavaPlugin implements Listener {
 	private static boolean darkUnderPlayer(Player player) {
 		return player.getLocation().getBlock().getLightLevel() < 5; 
 	}
-
-	private static void checkBlindness(Player player) {
-		if (checkPermission(player, "darkernights.bypass") 
-				|| !isNighttimeInWorld(player.getWorld())
-				|| player.hasPotionEffect(PotionEffectType.NIGHT_VISION)
-				|| !darkUnderPlayer(player)) {
-			removeBlindness(player);
-		}
-		else {
-			setBlindness(player);
-		}
-	}
-	
-	private static void removeBlindness(Player player) {
-		player.removePotionEffect(PotionEffectType.BLINDNESS);
-	}
-	
-	private static void setBlindness(Player player) {
-		player.addPotionEffect(blindnessEffect, true);
-	}
-	
-	private static boolean checkPermission(Player player, String permission) {
-		return (player.hasPermission(permission) || player.isOp());
-	}
 	
 	/**
 	 * Checks whether it is night in the world, or whether the
