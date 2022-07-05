@@ -112,7 +112,7 @@ public class DarkerNights extends JavaPlugin implements Listener {
 	 * @return true if the light level is below 5 units
 	 */
 	private static boolean darkUnderPlayer(Player player) {
-		return player.getLocation().getBlock().getLightLevel() < 5; 
+		return player.getLocation().getBlock().getLightLevel() < 3; 
 	}
 	
 	/**
